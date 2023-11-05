@@ -1,3 +1,6 @@
+# Fill the class given below for the first part of the assignment
+# You can add new functions if necessary
+# but don't change the signatures of the ones included
 import threading
 import random
 
@@ -8,11 +11,11 @@ class ConSet:
         self.empty = threading.Condition(self.lock)
         self.pop_waiting = 0
 
-    def insert(self, elt):
+    def insert(self, newItem):
         with self.lock:
-            self.data[elt] = True
+            self.data[newItem] = True
             self.empty.notify()
-
+        
     def pop(self):
         while True:
             with self.lock:
@@ -28,38 +31,8 @@ class ConSet:
                         self.empty.wait()
                     self.pop_waiting -= 1
 
+    def printSet(self):
+        print(self.data)
 
-##Testing 
 
-"""
-def insert(node_id, mailbox):
-    mailbox.insert(node_id)
-    print(mailbox.data)
 
-def pop(mailbox):
-    mailbox.pop()
-    print(mailbox.data)
-
-if __name__ == '__main__':
-    n = 10  # Number of nodes inserting
-    m = 10  # Number of nodes popping
-    mailbox = ConSet()
-    threads = []
-
-    # Create threads for inserting elements
-    for i in range(n):
-        thread = threading.Thread(target=insert, args=(i, mailbox))
-        threads.append(thread)
-        thread.start()
-
-    # Create threads for popping elements
-    for i in range(m):
-        thread = threading.Thread(target=pop, args=(mailbox,))
-        threads.append(thread)
-        thread.start()
-
-    # Wait for all threads to finish
-    for thread in threads:
-        thread.join()
-
-   """ 
