@@ -3,9 +3,8 @@ import multiprocessing as mp
 import zmq
 from abc import ABC, abstractmethod
 
-round = 0
-
-class PaxosNode(ID, prob, N, val, numRounds):        
+'''
+class PaxosNode(ID, crash_prob, num_nodes, val, num_rounds):        
     def __init__(self,ID: int, prob:float , N:int, val:int , numRounds:int):
         self.ID = ID
         self.prob = prob
@@ -53,7 +52,32 @@ class PaxosNode(ID, prob, N, val, numRounds):
     def sendFailure (self, msg, proposer, target, prob):
         self.send(msg)
 
+round = 0
+'''
+if __name__ == "__main__":
 
+# This part reads the argumets given in command line 
+# and prints them at the end with some formatting
+    if len(sys.argv) != 4:
+        print("Usage: python paxos.py [number of nodes] [probability of a crash] [number of rounds]")
+        sys.exit(1)
+    try:
+        num_nodes = int(sys.argv[1])
+        crash_prob = float(sys.argv[2])
+        num_rounds = int(sys.argv[3])
+        if crash_prob>1 or crash_prob<0:
+            print('The given crash probability is not valid!')
+        else:
+            print(f"NUM NODES: {num_nodes}, CRASH PROB: {crash_prob}, NUM ROUNDS: {num_rounds}")      
+    except:
+        print('One or more of the parameters is incorrect!')
+
+    print("ok")
+        
+    
+
+
+    
         
 
 
