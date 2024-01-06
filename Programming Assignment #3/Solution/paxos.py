@@ -23,7 +23,7 @@ def get_param():
 
     return num_nodes, crash_prob, num_rounds
 
-class PaxosNode(ID, crash_prob, num_nodes, val, num_rounds):        
+class PaxosNode:        
     def __init__(self,ID: int, prob:float , num_nodes:int, val:int , numRounds:int):
         self.ID = ID
         self.prob = prob
